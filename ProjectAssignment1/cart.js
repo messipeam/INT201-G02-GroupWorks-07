@@ -21,23 +21,22 @@ buttonTrash.addEventListener("click", () => {
 
 export function addProduct(event){
     let id = event.target.id;
-    let qty = 1;
     if(carts.some((item) => item.productId === id)){
-        carts[carts.findIndex((product) => product.productId === id)].quantity++;
-        const carttt = carts.findIndex((product) => product.productId === id)
+        carts[carts.findIndex((product) => product.productId === id)].numberOfUnits++;
+        numCart.textContent = countInCart();
         console.log(carts);
     }else{
-    carts.push({productId : id , quantity : qty});
+    carts.push({productId : id , numberOfUnits : 1});
     alert(` " ${id} " added in your cart`);
-    numCart.textContent = count();
+    numCart.textContent = countInCart();
     console.log(carts);
     }
 }
 
-function count(){
-    let count = 0;
-    for(let i=0; i < carts.length ; i++){
-        count += carts[i].quantity;
+function countInCart(){
+    let count = 0
+    for (const i in carts){
+        count += carts[i].numberOfUnits;
     }
     return count;
 }
