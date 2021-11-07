@@ -1,6 +1,6 @@
-import { products } from './products.js'
-import { emptyCart, addProduct} from './cart.js';
-
+import { products } from "./products.js";
+import { emptyCart, addProduct } from "./cart.js";
+let carts = [];
 
 const productContainer = document.querySelector("#product-container");
 
@@ -36,16 +36,18 @@ for (const product of products) {
   productList.appendChild(productId);
 
   let productName = document.createElement("p");
-  productName.setAttribute("style","font-weight : bold;")
+  productName.setAttribute("id", "product-name");
+  productName.setAttribute("style", "font-weight : bold;");
   productName.textContent = product.name;
   productList.appendChild(productName);
 
   let productPrice = document.createElement("p");
-  productPrice.textContent = "฿" + product.price + " Baht";
+  productPrice.textContent = `฿ ${product.price} Baht`;
   productList.appendChild(productPrice);
 
   let productStock = document.createElement("p");
-  productStock.textContent = "Available : " + product.stock;
+  productStock.setAttribute("id", "product-stock");
+  productStock.textContent = `Available : ${product.stock}`;
   productList.appendChild(productStock);
 
   let buyButton = document.createElement("button");
@@ -55,31 +57,33 @@ for (const product of products) {
   buyButton.addEventListener("click", addProduct);
 
   buyButton.textContent = "Add to cart";
- 
+
   productList.appendChild(buyButton);
 
   productElement.appendChild(productList);
 }
 
-
-const buttonSearch = document.getElementById('button-search');
+const buttonSearch = document.getElementById("button-search");
 buttonSearch.addEventListener("click", () => {
-  showHideSearch()
-})
+  showHideSearch();
+});
 
-function showHideSearch(){
-  const s = document.getElementById('search-bar');
-  if(s.style.display === "none"){
+//function แสดง/ซ่อน search-panel
+function showHideSearch() {
+  const s = document.getElementById("search-bar");
+  if (s.style.display === "none") {
     s.style.display = "flex";
-  }else{
+  } else {
     s.style.display = "none";
   }
- 
 }
 
-function searchProduct(){
+//function ค้นหาสินค้า
+function searchProduct() {
   let searchProduct = document.getElementById("search").value.toLowerCase();
-  let filterProductByName = products.filter((product) => product.name.toLowerCase().includes(searchProduct));
+  let filterProductByName = products.filter((product) =>
+    product.name.toLowerCase().includes(searchProduct)
+  );
 
   let divProduct = productElement.children;
 
@@ -88,19 +92,18 @@ function searchProduct(){
       i.style.display = "none";
     }
   } else {
-    for(const i of divProduct){
+    for (const i of divProduct) {
       for (const j of filterProductByName) {
-        if(i.id == j.productId){
+        if (i.id == j.productId) {
           i.style.display = "block";
           break;
-        }else{
+        } else {
           i.style.display = "none";
         }
       }
     }
   }
-}  
-
+}
 
 let buttonSubmit = document.getElementById("button-submit");
 buttonSubmit.addEventListener("click", () => {
