@@ -26,7 +26,8 @@ export function addProduct(event){
         numCart.textContent = countInCart();
         console.log(carts);
     }else{
-    carts.push({productId : id , numberOfUnits : 1});
+    const item = products.find((product) => product.productId === id)
+    carts.push({...item, numberOfUnits : 1});
     alert(` " ${id} " added in your cart`);
     numCart.textContent = countInCart();
     console.log(carts);
