@@ -4,7 +4,7 @@ let carts = [];
 
 const buttonTrash = document.getElementById("button-trash");
 const numCart = document.getElementById("numCart");
-
+const lookProductInCart = document.getElementById("cart-icon");
 
 //function เพิ่มสินค้า
 
@@ -46,4 +46,31 @@ function countInCart() {
   }
   return count;*/
   return carts.reduce((count, cartItem) => count + cartItem.numberOfUnits, 0);
+}
+
+
+//event สำหรับการกดปุ่มรูปตะกร้าจะแสดงรายการสินค้าที่เพิ่มเข้ามาได้
+lookProductInCart.addEventListener("click",() => {
+  showCart();
+});
+
+//function ในการแสดงรายการสินค้าให้ alert ขึ้นมา
+function showCart(){
+if(carts.length ===0){
+  alert("Your cart is empty")
+}else
+  {
+    let alertProduct ="";
+   
+   for(let readArr of carts){
+     
+    alertProduct+="  "+readArr.product.productId+"  "
+    alertProduct+=readArr.product.name+"  ";
+    alertProduct+="Unit: "+readArr.numberOfUnits+"\n";
+     }
+    
+     alert("this is your product\n"+alertProduct);
+
+    console.log(carts.length);
+  }
 }
